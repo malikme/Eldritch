@@ -3,10 +3,15 @@ import socket
 import struct
 from PIL import Image
 
+importantInfo = open('importantInfo.txt','r')
+ip = importantInfo.readline()[:-1]
+port = int(importantInfo.readline())
+importantInfo.close()
+
 # Start a socket listening for connections on 0.0.0.0:8000 (0.0.0.0 means
 # all interfaces)
 server_socket = socket.socket()
-server_socket.connect(('10.59.27.137', 8000))
+server_socket.connect((ip, port))
 i=1
 while True:
 	i = i + 1
