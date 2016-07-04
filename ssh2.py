@@ -2,22 +2,42 @@ import io
 import socket
 import struct
 from PIL import Image
+import numpy as np
 
 importantInfo = open('importantInfo.txt','r')
+myip = socket.gethostbyname(socket.gethostname())
 ip = importantInfo.readline()[:-1]
-port = int(importantInfo.readline())
+port = int(importantInfo.readline()[:-1])
 importantInfo.close()
 
-# Start a socket listening for connections on 0.0.0.0:8000 (0.0.0.0 means
-# all interfaces)
-server_socket = socket.socket()
-server_socket.connect((ip, port))
-i=1
-while True:
-	i = i + 1
-	if i == 1000000:
-		i = 0
 
+server_socket = socket.socket()
+server_socket.connect((myip, port))
+#sampleImage = Image.(imageDirectory)
+
+#This is from previous school project, sample code for image
+matrix = np.zeros((320,320,3))
+
+for i in range(320):
+	for j in range(320):
+		matrix[i,j]=[i,j,0]
+
+
+#img = Image.fromarray(matrix, 'RGB')
+#print len(str(matrix[0,0]))
+#print str(matrix[0,0])
+
+while True:
+	for i in range(320):
+		for j in range(320):
+			toBeSent = str(matrix[i,j])
+			print len(toBeSent)
+			#while len(str(toBeSent)) < 19:
+				#toBeSent = toBeSent + " "
+			server_socket.send(toBeSent)
+
+	break	
+	
 
 
 #try:
