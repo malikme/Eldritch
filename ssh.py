@@ -26,7 +26,7 @@ server_socket.listen(0)
 
 # Accept a single connection and make a file-like object out of it
 
-connection, addr = server_socket.accept()
+connection, addr = server_socket.accept()[0].makefile('rb')
 #[0].makefile('rb')
 
 #print connection

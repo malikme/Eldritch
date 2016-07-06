@@ -27,7 +27,7 @@ try:
         # processing on it
         image_stream.seek(0)
         image = Image.open(image_stream)
-        image.show()
+        image.show("hello")
 
         print('Image is %dx%d' % image.size)
         image.verify()
